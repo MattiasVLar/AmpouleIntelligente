@@ -1,0 +1,4 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"D1, D10, D11, D12, D13, D14, D2, D3, D4, D5, D6, D7, D8, D9",LED_Luminus_MP-3030-1100_3.0x3.0mm,14,LED,
+J1,SAMTEC_CLP-104-02-X-D,1,Conn_01x08_Socket,
+U1,SMD_L3328_VIS,1,VEML3328,
