@@ -1,4 +1,4 @@
-/* * Data converted from C:/Users/Mattias/Documents/Git/Ampoule/managed_components/espressif__esp_rainmaker/server_certs/rmaker_ota_server.crt
+/* * Data converted from C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/managed_components/espressif__esp_rainmaker/server_certs/rmaker_ota_server.crt
  * (null byte appended)
  */
 .data

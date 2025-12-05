@@ -30,9 +30,24 @@ static int g_cct = 50;        // 0 (Warm) to 100 (Cool)
 
 esp_rmaker_device_t *light_device;
 
+// =========================================================
+//  CALIBRATION SETTINGS (Based on your measurements)
+// =========================================================
+
+// 1. COOL CHANNEL SCALING
+// Previous ratio was ~0.856.
+// You measured Cool=4630 vs Warm=4576. Cool is 1.2% too bright.
+// New Factor = 0.856 * (4576 / 4630) = ~0.846
+#define COOL_CHANNEL_SCALE 0.846f
+
+// 2. MIDPOINT ATTENUATION
+// You measured Middle=4758 vs Target=4576.
+// The middle is ~4% too bright.
+// We will dip the brightness by 0.04 at the center.
+#define MIDPOINT_DROP 0.04f
+
 static void update_led_output()
 {
-    // If power is OFF, kill both channels
     if (g_power == 0)
     {
         app_light_set_brightness(1, 0);
@@ -40,17 +55,36 @@ static void update_led_output()
         return;
     }
 
-    // --- The Mixing Math (Linear Blend) ---
-    // If CCT is 0 (Warmest): Cool = 0%, Warm = 100% of Brightness
-    // If CCT is 100 (Coolest): Cool = 100% of Brightness, Warm = 0%
+    // --- 1. Calculate the Midpoint "Dip" ---
+    // Distance from center (0 to 50 scale normalized to 0.0 - 1.0)
+    // If CCT is 50, dist is 0.0. If CCT is 0 or 100, dist is 1.0.
+    float dist_from_center = (float)abs(g_cct - 50) / 50.0f;
 
-    int cool_val = (g_brightness * g_cct) / 100;
-    int warm_val = (g_brightness * (100 - g_cct)) / 100;
+    // Correction Factor:
+    // Center (dist=0) -> 1.0 - 0.04 = 0.96 (96% brightness)
+    // Edge (dist=1)   -> 1.0 - 0.00 = 1.00 (100% brightness)
+    float midpoint_correction = 1.0f - (MIDPOINT_DROP * (1.0f - dist_from_center));
 
-    ESP_LOGI(TAG, "Updating LEDs -> Cool: %d, Warm: %d", cool_val, warm_val);
+    // --- 2. Calculate Ratios ---
+    float ratio_cool = (float)g_cct / 100.0f;
+    float ratio_warm = 1.0f - ratio_cool;
 
-    app_light_set_brightness(1, cool_val);
-    app_light_set_brightness(2, warm_val);
+    // --- 3. Apply Factors ---
+    // Cool: Global_Bright * Ratio * Hard_Scale * Midpoint_Dip
+    float cool_pwm = (float)g_brightness * ratio_cool * COOL_CHANNEL_SCALE * midpoint_correction;
+
+    // Warm: Global_Bright * Ratio * Midpoint_Dip
+    float warm_pwm = (float)g_brightness * ratio_warm * midpoint_correction;
+
+    // --- 4. Hardware Output (Swap Channels: 1=Warm, 2=Cool) ---
+    int ch1_warm_val = (int)warm_pwm;
+    int ch2_cool_val = (int)cool_pwm;
+
+    ESP_LOGI(TAG, "CCT:%d | Comp:%.3f | Out -> Warm: %d, Cool: %d",
+             g_cct, midpoint_correction, ch1_warm_val, ch2_cool_val);
+
+    app_light_set_brightness(1, ch1_warm_val);
+    app_light_set_brightness(2, ch2_cool_val);
 }
 
 /* Callback to handle param updates */
@@ -131,7 +165,7 @@ void app_main()
 
     /* --- Add Parameter 2 (Custom Slider) --- */
     // Create standard CCT param with default value (e.g., 2700 Kelvin)
-    esp_rmaker_param_t *cct_param = esp_rmaker_cct_param_create(ESP_RMAKER_DEF_CCT_NAME, 2700);
+    esp_rmaker_param_t *cct_param = esp_rmaker_cct_param_create(ESP_RMAKER_DEF_CCT_NAME, 50);
     esp_rmaker_device_add_param(light_device, cct_param);
     esp_rmaker_param_add_bounds(cct_param, esp_rmaker_int(0), esp_rmaker_int(100), esp_rmaker_int(1));
     // Add the device to the node

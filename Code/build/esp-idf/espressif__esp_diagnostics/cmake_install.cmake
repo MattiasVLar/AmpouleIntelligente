@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Mattias/Documents/Git/Ampoule/managed_components/espressif__esp_diagnostics
+# Install script for directory: C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/managed_components/espressif__esp_diagnostics
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Ampoule")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Code")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

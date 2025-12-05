@@ -1,4 +1,4 @@
-/* * Data converted from C:/Users/Mattias/Documents/Git/Ampoule/managed_components/espressif__esp_insights/server_certs/mqtt_server.crt
+/* * Data converted from C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/managed_components/espressif__esp_insights/server_certs/mqtt_server.crt
  * (null byte appended)
  */
 .data

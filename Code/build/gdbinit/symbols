@@ -13,8 +13,8 @@ end
 
 # Load bootloader symbols
 set confirm off
-    add-symbol-file C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader/bootloader.elf
+    add-symbol-file C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader/bootloader.elf
 set confirm on
 
 # Load application symbols
-file C:/Users/Mattias/Documents/Git/Ampoule/build/Ampoule.elf
+file C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/Code.elf

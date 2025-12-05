@@ -10,18 +10,18 @@ if(NOT EXISTS "C:/Users/Mattias/esp/v5.5.1/esp-idf/components/bootloader/subproj
   file(MAKE_DIRECTORY "C:/Users/Mattias/esp/v5.5.1/esp-idf/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
-  "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader"
-  "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix"
-  "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix/tmp"
-  "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix/src/bootloader-stamp"
-  "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix/src"
-  "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader"
+  "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix"
+  "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix/tmp"
+  "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix/src"
+  "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "C:/Users/Mattias/Documents/Git/Ampoule/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "C:/Users/Mattias/Documents/Git/AmpouleIntelligente/Code/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

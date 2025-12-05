@@ -288,19 +288,19 @@ dependencies:
   rmaker_app_insights:
     dependencies: []
     source:
-      path: C:\Users\Mattias\Documents\Git\Ampoule\components\rmaker_app_insights
+      path: C:\Users\Mattias\Documents\Git\AmpouleIntelligente\Code\components\rmaker_app_insights
       type: local
     version: 1.0.0
   rmaker_app_network:
     dependencies: []
     source:
-      path: C:\Users\Mattias\Documents\Git\Ampoule\components\rmaker_app_network
+      path: C:\Users\Mattias\Documents\Git\AmpouleIntelligente\Code\components\rmaker_app_network
       type: local
     version: 1.0.0
   rmaker_app_reset:
     dependencies: []
     source:
-      path: C:\Users\Mattias\Documents\Git\Ampoule\components\rmaker_app_reset
+      path: C:\Users\Mattias\Documents\Git\AmpouleIntelligente\Code\components\rmaker_app_reset
       type: local
     version: 1.0.0
 direct_dependencies:
@@ -314,6 +314,6 @@ direct_dependencies:
 - espressif/rmaker_app_reset
 - espressif/rmaker_common
 - idf
-manifest_hash: 5af8b86b3f3e33d46d530480956ed870efddfb3230a3d9c06bcd078a50de3d71
+manifest_hash: eca9e4d3af25936f53b253334f2f090f1a60237e248be6e366b94d1efb458035
 target: esp32c6
 version: 2.0.0
