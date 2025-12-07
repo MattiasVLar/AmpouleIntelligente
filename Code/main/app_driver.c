@@ -52,7 +52,6 @@ static void app_pwm_init(void)
     ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_1));
 }
 
-/* Helper to write to hardware */
 static void update_hardware()
 {
     uint32_t duty_1 = 0;
@@ -70,12 +69,6 @@ static void update_hardware()
     ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_1);
 }
 
-esp_err_t app_light_set_power(bool power)
-{
-    g_power = power;
-    return ESP_OK;
-}
-
 esp_err_t app_light_set_brightness(int channel, int brightness)
 {
     if (channel == 1)
@@ -87,6 +80,12 @@ esp_err_t app_light_set_brightness(int channel, int brightness)
         g_bright_2 = brightness;
     }
     update_hardware();
+    return ESP_OK;
+}
+
+esp_err_t app_light_set_power(bool power)
+{
+    g_power = power;
     return ESP_OK;
 }
 
